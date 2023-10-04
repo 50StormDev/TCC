@@ -42,7 +42,7 @@ function App() {
                     <route.component/>
                   </AuthChecker>
                 ) : (
-                  <PersistentDrawerLeft children={<route.component/>}/>
+                  <PersistentDrawerLeft />
                 )
               }
             />
@@ -52,5 +52,5 @@ function App() {
     </div>
   );
 }
-
+// children={<route.component/>}
 export default App;

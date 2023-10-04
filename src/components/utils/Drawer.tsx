@@ -20,31 +20,31 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import CalculateIcon from '@mui/icons-material/Calculate';
-import { AccountCircle, Logout, Notifications, PropaneSharp } from '@mui/icons-material';
+import { AccountCircle, Notifications } from '@mui/icons-material';
 import { Badge, Menu, MenuItem } from '@mui/material';
-import { ReactNode } from 'react';
+// import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-  open?: boolean;
-}>(({ theme, open }) => ({
-  flexGrow: 1,
-  padding: theme.spacing(3),
-  transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: `-${drawerWidth}px`,
-  ...(open && {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  }),
-}));
+// const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+//   open?: boolean;
+// }>(({ theme, open }) => ({
+//   flexGrow: 1,
+//   padding: theme.spacing(3),
+//   transition: theme.transitions.create('margin', {
+//     easing: theme.transitions.easing.sharp,
+//     duration: theme.transitions.duration.leavingScreen,
+//   }),
+//   marginLeft: `-${drawerWidth}px`,
+//   ...(open && {
+//     transition: theme.transitions.create('margin', {
+//       easing: theme.transitions.easing.easeOut,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//     marginLeft: 0,
+//   }),
+// }));
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -76,11 +76,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export default function PersistentDrawerLeft({ children }: Props) {
+// interface Props {
+//   children: React.ReactNode;
+// }
+// { children }: Props
+export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -99,6 +99,8 @@ export default function PersistentDrawerLeft({ children }: Props) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
   };
+
+  handleChange
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -247,7 +249,7 @@ export default function PersistentDrawerLeft({ children }: Props) {
         component="main"
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
-        {children}
+        {/* {children} */}
       </Box>
     </Box>
   );
