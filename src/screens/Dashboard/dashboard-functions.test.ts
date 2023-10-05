@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { setDay, calculateSalary } from './fuctions'
+import { setDay, calculateSalary } from './dashboard-functions'
 
 test('setDay 8 to equal 8', () => {
   expect(setDay(8)).toBe(8)
