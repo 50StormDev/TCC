@@ -15,11 +15,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getDocs, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../config/firebase';
+import { db } from '../../config/firebase';
 import { Copyright } from '@mui/icons-material';
-import { useAppSelector, useAppDispatch } from '../hooks'
-import { UserState } from '../intefaces/ user';
-import { setAuthCredential } from '../store/user/userSlice';
+import { useAppSelector, useAppDispatch } from '../../hooks'
+import { UserState } from '../../intefaces/ user';
+import { setAuthCredential } from '../../store/user/userSlice';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.

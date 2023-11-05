@@ -39,10 +39,10 @@ function App() {
               element={
                 route.protected ? (
                   <AuthChecker>
-                    <route.component/>
+                    <PersistentDrawerLeft children={<route.component/>} />
                   </AuthChecker>
                 ) : (
-                  <PersistentDrawerLeft />
+                  <PersistentDrawerLeft children={<route.component/>} />
                 )
               }
             />
