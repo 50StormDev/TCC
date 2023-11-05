@@ -1,25 +1,16 @@
-import { Box, Button, FormControl, Input, InputLabel, Stack, TextField, Typography } from "@mui/material";
-import Center from "../../components/utils/Center";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import CurrencyYenIcon from '@mui/icons-material/CurrencyYen';
 import React from "react";
 
 export default function Simulador(){
 
   // set useState to handle the entries 
-  const [time,setTime] = React.useState(0);
   const [formData, setFormData] = React.useState({
     hourPrice: 0,
     workDays: 0,
     overtime: 0,
     resultDisplay: 0
   })
-  // create function to display clock 
-  React.useEffect(() => {
-    const today = new Date();
-    let h = today.getHours();
-    let m = today.getMinutes();
-  },[])
-  
 
   // function to handle entry 
 

@@ -1,5 +1,5 @@
 import Center from "../../components/utils/Center";
-import CustomMonth from "./CustomMonth";
+// import CustomMonth from "./CustomMonth";
 import DashboardCalendar from "./DashboardCalendar";
 
 export default function Dashboard() {
