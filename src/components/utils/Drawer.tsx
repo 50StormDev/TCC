@@ -21,7 +21,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import { AccountCircle, Notifications } from '@mui/icons-material';
-import { Badge, Menu, MenuItem } from '@mui/material';
+import { Badge, Menu, MenuItem, Stack } from '@mui/material';
 // import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -76,11 +76,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-// interface Props {
-//   children: React.ReactNode;
-// }
-// { children }: Props
-export default function PersistentDrawerLeft() {
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function PersistentDrawerLeft({ children }: Props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -108,20 +108,24 @@ export default function PersistentDrawerLeft() {
 
   const handleClose = () => {
     setAnchorEl(null);
+    navigate('/perfil')
   };
 
   const handleNavigation = (option: number) => {
     switch(option){
       case 0: {
         navigate("/dashboard")
+        setOpen(false)
         return;
       }
       case 1: {
         navigate("/time-card")
+        setOpen(false)
         return;
       }
       case 2: {
         navigate("/simulador")
+        setOpen(false)
         return;
       }
       default: return <div></div>
@@ -139,118 +143,124 @@ export default function PersistentDrawerLeft() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Holerite JP
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+      <Stack marginBottom={"40px"}>
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
             <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
               color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
             >
-              <Badge badgeContent={17} color="error">
-                <Notifications />
-              </Badge>
+              <MenuIcon />
             </IconButton>
-            {auth && (
-              <div style={{marginRight:"0"}}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
-            )}
-          </Box>
-          
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+            <Typography variant="h6" noWrap component="div">
+              Holerite JP
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="error">
+                  <Notifications />
+                </Badge>
+              </IconButton>
+              {auth && (
+                <div style={{marginRight:"0"}}>
+                  <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                  </Menu>
+                </div>
+              )}
+            </Box>
+            
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {['Dashboard','Time-Card', 'Simulador'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton onClick={() => handleNavigation(index)}>
-                <ListItemIcon>
-                  {renderIcons(index)}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Sair'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <Box
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {['Dashboard','Time-Card', 'Simulador'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton onClick={() => handleNavigation(index)}>
+                  <ListItemIcon>
+                    {renderIcons(index)}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['Sair'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+      </Stack>
+      <Stack>
+        <Box
         component="main"
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
-        {/* {children} */}
+        {children}
       </Box>
+      </Stack>
+      
+      
     </Box>
   );
 }

@@ -1,8 +1,9 @@
 import Dashboard from "../screens/Dashboard/Dashboard";
-import SignIn from "../screens/Login";
-import Home from "../screens/Perfil";
-import SmartForm from "../screens/Simulador";
-import TimeCard from "../screens/TimeCard";
+import SignIn from "../screens/Login/Login";
+import Perfil from "../screens/Perfil/Perfil";
+import Home from "../screens/Perfil/Perfil";
+import SmartForm from "../screens/Simulation/Simulador";
+import TimeCard from "../screens/TimeCard/TimeCard";
 
 interface RouteType {
   path: string;
@@ -42,7 +43,18 @@ const routes: RouteType[] = [
     name: "/Simulador",
     protected: false,
   },
-  
+  {
+    path: "/perfil",
+    component: Perfil,
+    name: "/Perfil",
+    protected: false,
+  },
+  {
+    path: "*",
+    component: SignIn,
+    name: "/SignIn",
+    protected: false,
+  },
 ];
 
 export default routes;
